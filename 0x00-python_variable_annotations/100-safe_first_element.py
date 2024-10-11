@@ -2,18 +2,21 @@
 """
 Augment the following code with the correct duck-typed annotations
 """
-from typing import Iterable, Sequence, List, Tuple
+from typing import Any, Union, List
 
 
-def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
+def safe_first_element(lst: Union[List[Any], None]) -> Union[Any, None]:
     """
-    Returns a list of tuples containing elements and their respective lengths.
+    Return the first element of a list or None if the list is empty.
 
     Args:
-        lst (Iterable[Sequence]): A list (or iterable) of sequences.
+        lst (Union[List[Any], None]): The list to retrieve the first element
+        from.
 
     Returns:
-        List[Tuple[Sequence, int]]: A list of tuples where each tuple contains
-        an element from the input list and its length.
+        Union[Any, None]: The first element of the list or None if the list is
+        empty.
     """
-    return [(i, len(i)) for i in lst]
+    if lst is None or len(lst) == 0:
+        return None
+    return lst[0]
